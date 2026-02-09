@@ -10,7 +10,7 @@ def fizzbuzz():
         else:
             print("{}".format(i), end="")
 
-        if i < 99:
+        if i < 101:
             print(" ", end="")
         else:
             print("")
