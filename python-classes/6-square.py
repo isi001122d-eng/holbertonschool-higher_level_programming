@@ -6,17 +6,11 @@ Bu modul koordinat sisteminə malik Square sinfini ehtiva edir.
 
 class Square:
     """
-    Kvadrat fiqurunu təmsil edən təkmilləşdirilmiş sinif.
+    Kvadrat fiqurunu təmsil edən sinif.
     """
 
     def __init__(self, size=0, position=(0, 0)):
-        """
-        Yeni bir Kvadrat yaradır.
-
-        Args:
-            size (int): Kvadratın ölçüsü.
-            position (tuple): Kvadratın (x, y) koordinatları.
-        """
+        """Yeni kvadrat yaradır."""
         self.size = size
         self.position = position
 
@@ -27,7 +21,7 @@ class Square:
 
     @size.setter
     def size(self, value):
-        """Ölçü üçün setter."""
+        """Ölçü üçün setter (Bayaq etdiyimiz kimi)."""
         if type(value) is not int:
             raise TypeError("size must be an integer")
         if value < 0:
@@ -42,33 +36,34 @@ class Square:
     @position.setter
     def position(self, value):
         """
-        Koordinat üçün setter. 
-        Value 2 müsbət tam ədəddən ibarət tuple olmalıdır.
+        Koordinat üçün setter.
+        Səhv varsa, Traceback üçün TypeError fırladır.
         """
         if (not isinstance(value, tuple) or
                 len(value) != 2 or
-                not all(isinstance(num, int) for num in value) or
+                not all(type(num) is int for num in value) or
                 not all(num >= 0 for num in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
     def area(self):
-        """Sahəni hesablayır."""
+        """Sahəni qaytarır."""
         return self.__size ** 2
 
     def my_print(self):
         """
-        Kvadratı koordinatlarını nəzərə alaraq çap edir.
+        Kvadratı koordinatlara uyğun çap edir.
         """
         if self.__size == 0:
             print("")
             return
 
-        # Y koordinatı üçün boş sətirlər (Yuxarıdan məsafə)
-        [print("") for i in range(self.__position[1])]
+        # Y koordinatı: Yalnız size > 0 olduqda boş sətirlər çap olunur
+        for i in range(self.__position[1]):
+            print("")
 
-        # Kvadratın özünü çap etmək
+        # Kvadratın sətirləri
         for i in range(self.__size):
-            # X koordinatı üçün boşluqlar (Soldan məsafə)
+            # X koordinatı: Hər sətirdən əvvəl boşluqlar
             print(" " * self.__position[0], end="")
             print("#" * self.__size)
