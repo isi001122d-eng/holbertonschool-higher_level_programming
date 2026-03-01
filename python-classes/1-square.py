@@ -1,9 +1,19 @@
 #!/usr/bin/python3
-"""Bu Modul docstring-idir (Faylın başında olur)"""
+"""
+Kvadratları təyin edən və ölçülərini saxlayan modul.
+"""
+
 
 class Square:
-    """Bu Class docstring-idir (Sinfin daxilində olur)"""
+    """
+    Square sinfi bir kvadratı təsvir edir.
+    """
 
     def __init__(self, size):
-        """Bu Metod docstring-idir (Funksiyanın daxilində olur)"""
+        """
+        Yeni bir Kvadrat nümunəsi yaradır.
+
+        Args:
+            size (int): Kvadratın tərəfinin uzunluğu.
+        """
         self.__size = size
