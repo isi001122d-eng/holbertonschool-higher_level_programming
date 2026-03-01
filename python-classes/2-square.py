@@ -11,18 +11,17 @@ class Square:
 
     def __init__(self, size=0):
         """
-        Kvadrat obyektini yaradır və daxil edilən ölçünü yoxlayır.
+        Yeni bir Kvadrat yaradır.
 
         Args:
-            size (int, optional): Kvadratın tərəfi. Defolt dəyəri 0-dır.
+            size (int): Kvadratın tərəfi. Default 0-dır.
 
         Raises:
             TypeError: Əgər size tam ədəd (integer) deyilsə.
             ValueError: Əgər size 0-dan kiçikdirsə.
         """
-        if not isinstance(size, int):
+        if type(size) is not int:
             raise TypeError("size must be an integer")
         if size < 0:
             raise ValueError("size must be >= 0")
-        
         self.__size = size
