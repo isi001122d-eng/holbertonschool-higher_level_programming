@@ -4,23 +4,25 @@ from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
-    """Abstract Animal class definition"""
+    """Abstract Animal class"""
 
     @abstractmethod
-    def speak(self):
-        """Abstract method that must be implemented by subclasses"""
+    def sound(self):
+        """Abstract method for animal sound"""
         pass
 
-class Dog(Animal):
-    """Dog subclass that inherits from Animal"""
 
-    def speak(self):
-        """Implementation of speak for Dog"""
-        return "Woof!"
+class Dog(Animal):
+    """Dog subclass inheriting from Animal"""
+
+    def sound(self):
+        """Implementation of sound for Dog"""
+        return "Bark"
+
 
 class Cat(Animal):
-    """Cat subclass that inherits from Animal"""
+    """Cat subclass inheriting from Animal"""
 
-    def speak(self):
-        """Implementation of speak for Cat"""
-        return "Meow!"
+    def sound(self):
+        """Implementation of sound for Cat"""
+        return "Meow"
