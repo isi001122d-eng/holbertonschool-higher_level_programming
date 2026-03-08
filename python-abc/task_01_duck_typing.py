@@ -1,65 +1,65 @@
 #!/usr/bin/python3
 """
-Şekiller, Arayüzler ve Duck Typing modülü
+Shapes, Interfaces, and Duck Typing modulu
 """
 from abc import ABC, abstractmethod
-import math
 
 
 class Shape(ABC):
     """
-    İki soyut metodu olan soyut Shape sınıfı: area ve perimeter
+    Abstract class Shape: area və perimeter metodları ilə
     """
     @abstractmethod
     def area(self):
-        """Alanı hesaplayan soyut metod"""
+        """Abstract method for area"""
         pass
 
     @abstractmethod
     def perimeter(self):
-        """Çevreyi hesaplayan soyut metod"""
+        """Abstract method for perimeter"""
         pass
 
 
 class Circle(Shape):
     """
-    Shape sınıfından türetilen Circle sınıfı
+    Circle sinfi - Shape-dən miras alır
     """
     def __init__(self, radius):
-        """Yarıçapı (radius) başlatır"""
+        """Radiusu inisializasiya edir"""
         self.radius = radius
 
     def area(self):
-        """Dairenin alanını hesaplar: pi * r^2"""
+        """Dairənin sahəsi: pi * r^2"""
+        import math
         return math.pi * (self.radius ** 2)
 
     def perimeter(self):
-        """Dairenin çevresini hesaplar: 2 * pi * r"""
+        """Dairənin çevrəsi: 2 * pi * r"""
+        import math
         return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
     """
-    Shape sınıfından türetilen Rectangle sınıfı
+    Rectangle sinfi - Shape-dən miras alır
     """
     def __init__(self, width, height):
-        """Genişlik ve yüksekliği başlatır"""
+        """Width və height-i inisializasiya edir"""
         self.width = width
         self.height = height
 
     def area(self):
-        """Dikdörtgenin alanını hesaplar: w * h"""
+        """Düzbucaqlının sahəsi: w * h"""
         return self.width * self.height
 
     def perimeter(self):
-        """Dikdörtgenin çevresini hesaplar: 2 * (w + h)"""
+        """Düzbucaqlının çevrəsi: 2 * (w + h)"""
         return 2 * (self.width + self.height)
 
 
 def shape_info(shape):
     """
-    Duck typing kullanarak nesnenin alan ve çevresini yazdırır.
-    Nesnenin tipini kontrol etmeden doğrudan area() ve perimeter() çağırır.
+    Duck typing istifadə edərək sahə və çevrəni çap edir
     """
     print("Area: {}".format(shape.area()))
     print("Perimeter: {}".format(shape.perimeter()))
