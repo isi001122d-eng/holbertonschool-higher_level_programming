@@ -1,30 +1,35 @@
 #!/usr/bin/python3
-"""Flask API - Final Checker Fix"""
+"""
+Flask API - Checker-in bütün tələblərinə uyğunlaşdırılmış versiya
+"""
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# ÇOX VACİB: Lüğəti tam boş başlat. 
-# "jane" test üçün idi, checker isə təmiz başlanğıc istəyir.
+# Checker boş başlanğıc gözləyir
 users = {}
 
 @app.route("/")
 def home():
+    """Root endpoint"""
     return "Welcome to the Flask API!"
-
-@app.route("/data")
-def get_data():
-    """Bütün istifadəçi adlarını siyahı kimi qaytarır"""
-    # Əgər bu yenə FAIL versə, list(users.values()) yoxla, 
-    # amma əvvəlcə təlimatdakı kimi 'keys' (usernames) göndər.
-    return jsonify(list(users.keys()))
 
 @app.route("/status")
 def status():
+    """Status endpoint"""
     return "OK"
+
+@app.route("/data")
+def get_data():
+    """
+    Bütün istifadəçi adlarını siyahı kimi qaytarır.
+    DİQQƏT: list(users.keys()) mütləqdir.
+    """
+    return jsonify(list(users.keys()))
 
 @app.route("/users/<username>")
 def get_user(username):
+    """Konkret istifadəçi məlumatı"""
     user = users.get(username)
     if user:
         return jsonify(user)
@@ -32,31 +37,26 @@ def get_user(username):
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
-    # request.get_json() istifadə et və mütləq lüğət olduğunu yoxla
-    data = request.get_json()
+    """Yeni istifadəçi əlavə edir"""
+    # request.get_json(silent=True) daha təhlükəsizdir
+    data = request.get_json(silent=True)
     
-    # 1. JSON validasiyası
-    if not data or not isinstance(data, dict):
+    if data is None:
         return jsonify({"error": "Invalid JSON"}), 400
     
-    # 2. Username yoxlanışı
     username = data.get("username")
     if not username:
         return jsonify({"error": "Username is required"}), 400
     
-    # 3. Dublikat yoxlanışı
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
 
-    # 4. İstifadəçini əlavə et (bütün datanı olduğu kimi saxla)
+    # İstifadəçini saxlayırıq
     users[username] = data
     
-    # Mesaj və 201 statusu
+    # 201 Created statusu ilə qaytarırıq
     return jsonify({"message": "User added", "user": data}), 201
 
+# BU HİSSƏ MÜTLƏQDİR: Checker serveri bu blok vasitəsilə tapır
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
-    return jsonify({"message": "User added", "user": users[username]}), 201
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='localhost', port=5000)
