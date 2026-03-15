@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """
-Basic Serialization modulu
+Basic Serialization modulu - Python lüğətini JSON-a çevirmək və geri qaytarmaq
 """
 import json
 
 
 def serialize_and_save_to_file(data, filename):
     """
-    Python l�ini JSON faylına serializasiya edir
+    Python lüğətini JSON faylına serializasiya edir və yadda saxlayır
     """
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f)
@@ -15,7 +15,7 @@ def serialize_and_save_to_file(data, filename):
 
 def load_and_deserialize(filename):
     """
-    JSON faylından lumatları oxuyur  Pythoni çevirir
+    JSON faylından məlumatları oxuyur və Python lüğətinə deserealizasiya edir
     """
     with open(filename, 'r', encoding='utf-8') as f:
         return json.load(f)
