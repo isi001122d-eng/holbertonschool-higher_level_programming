@@ -1,2 +1,2 @@
--- first_table cədvəlinin strukturunu göstərir
-DESCRIBE first_table;
+-- first_table cədvəlinin yaradılma skriptini və strukturunu göstərir
+SHOW CREATE TABLE first_table;
